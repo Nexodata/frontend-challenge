@@ -1,50 +1,7 @@
-import React, { useEffect, useState } from 'react';
-// import Teste from './assets/icon-paper.svg';
+import React, { useState } from 'react';
 import './App.css';
-
-function getMachineRandomChoice() {
-  const allPossibleChoices: typeRockPaperScissors[] = ['rock', 'paper', 'scissors'];
-  const random = Math.floor(Math.random() * (3 - 0) + 0);
-  return allPossibleChoices[random];
-}
-
-function Button(props: React.ButtonHTMLAttributes<HTMLButtonElement>) {
-  return (
-    <button
-      style={{ width: 130, height: 130, borderRadius: 65, background: "#FFFFFF" }}
-      {...props}
-    >
-      {props.children}
-    </button>
-  )
-}
-
-const rockPaperScissorsRules = {
-  rock: {
-    rock: 0,
-    paper: -1,
-    scissors: 1,
-  },
-  paper: {
-    rock: 1,
-    paper: 0,
-    scissors: -1,
-  },
-  scissors: {
-    rock: -1,
-    paper: 1,
-    scissors: 0,
-  }
-}
-
-type typeRockPaperScissors = 'rock' | 'paper' | 'scissors' | undefined;
-
-function rockPaperScissorsWinner(player1: typeRockPaperScissors, player2: typeRockPaperScissors) {
-  if (!player1 || !player2) {
-    return 0;
-  }
-  return rockPaperScissorsRules[player1][player2];
-}
+import { RPSButton } from './components/MainButton';
+import { getMachineRandomChoice, rockPaperScissorsWinner, typeRockPaperScissors } from './utils';
 
 function App() {
   const [machineChoice, setMachineChoice] = useState<typeRockPaperScissors>();
@@ -53,12 +10,11 @@ function App() {
   const [winner, setWinner] = useState('');
 
   function calculateWinner(choice: typeRockPaperScissors) {
+    setUserChoice(choice);
     const RoundMachineChoice = getMachineRandomChoice();
     const roundScore = rockPaperScissorsWinner(choice, RoundMachineChoice);
-
     setMachineChoice(RoundMachineChoice);
-    setUserChoice(choice);
-
+  
     setScore(e => e + roundScore);
     if (roundScore > 0) {
       setWinner('YOU WIN');
@@ -72,28 +28,27 @@ function App() {
   }
 
   return (
-    <div className="App">
-      <div style={{ color: "#34495E", fontWeight: 700, background: "#ECF0F1", border: "2px solid #BDC3C7", borderRadius: 8, padding: "15px 36px 5px 37px", marginBottom: 110 }}>
+    <div className="App" style={{ fontWeight: 700 }}>
+      <div className="ScoreBoard">
         <p>SCORE</p>
         <p>{score}</p>
       </div>
-      {/* <Teste /> */}
-      
       {!userChoice ? (
         <>
-          <Button onClick={() => calculateWinner('rock')}>rock</Button>
-          <Button onClick={() => calculateWinner('paper')}>paper</Button>
-          <Button onClick={() => calculateWinner('scissors')}>scissors</Button>
+          <RPSButton choice="rock" onClick={() => calculateWinner('rock')}>rock</RPSButton>
+          <RPSButton choice="paper" onClick={() => calculateWinner('paper')}>paper</RPSButton>
+          <RPSButton choice="scissors" onClick={() => calculateWinner('scissors')}>scissors</RPSButton>
         </>
-      ) : (
+      ) :
+      (
         <>
-          <Button>{userChoice?.toLocaleUpperCase()}</Button>
-          <Button>{machineChoice?.toLocaleUpperCase()}</Button>
+          <RPSButton choice={userChoice}>{userChoice?.toLocaleUpperCase()}</RPSButton>
+          <RPSButton choice={machineChoice}>{machineChoice?.toLocaleUpperCase()}</RPSButton>
           <div style={{ marginTop: 53, marginBottom: 31 }}>
             MACHINE SELECTED <p>{machineChoice?.toLocaleUpperCase()}</p>
           </div>
           <p style={{ marginBottom: 27 }}>{winner}</p>
-          <button style={{ background: "#2980B9" }} onClick={() => setUserChoice(undefined)}>PLAY AGAIN</button>
+          <button className="PlayAgainButton" onClick={() => setUserChoice(undefined)}>PLAY AGAIN</button>
         </>
       )}
     </div>

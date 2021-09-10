@@ -4,7 +4,32 @@
   height: 100vh;
   padding: 40px;
   color: #FFFFFF;
-  /* font-family: Roboto; */
+}
+
+.ScoreBoard {
+  color: #34495E;
+  background: #ECF0F1;
+  border: 2px solid #BDC3C7;
+  border-radius: 8px;
+  padding: 15px 36px 5px 37px;
+  margin-bottom: 110px;
+}
+
+.MainButton {
+  width: 130px;
+  height: 130px;
+  border-radius: 65px;
+  background: #FFFFFF;
+  cursor: pointer;
+}
+
+.PlayAgainButton {
+  cursor: pointer;
+  color: #FFFFFF;
+  background: #2980B9;
+  padding: 5px 36px;
+  border: none;
+  border-radius: 8px;
 }
 
 .App-logo {
