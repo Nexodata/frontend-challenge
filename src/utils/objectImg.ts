@@ -6,17 +6,21 @@ export const objectImg: any = {
   0: {
     img: rock,
     color: 'green',
+    alt: 'image rock',
   },
   1: {
     img: paper,
     color: 'yellow',
+    alt: 'image paper',
   },
   2: {
     img: scissors,
     color: 'cyan',
+    alt: 'image scissors',
   },
   3: {
     img: null,
     color: 'red',
+    alt: 'image loading',
   },
 }

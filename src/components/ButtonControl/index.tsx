@@ -4,14 +4,17 @@ import { objectImg } from '../../utils/objectImg'
 
 interface ButtonControl {
   range: number
-  onClick?: any
+  onClick?: (range: number) => void
   disabled?: boolean
+  props?: any
 }
 
-const ButtonControl = ({ range, onClick, disabled }: ButtonControl) => {
+const ButtonControl = (props: ButtonControl) => {
+  const { range, onClick } = props
+
   return (
-    <Style.Container color={objectImg[range].color} onClick={() => !disabled && onClick(range)}>
-      <Style.Wrapper>{range != 3 && <img src={objectImg[range].img} alt="paper" />}</Style.Wrapper>
+    <Style.Container {...props} color={objectImg[range].color} onClick={() => onClick && onClick(range)}>
+      <Style.Wrapper>{range !== 3 && <img src={objectImg[range].img} alt={objectImg[range].alt} />}</Style.Wrapper>
     </Style.Container>
   )
 }

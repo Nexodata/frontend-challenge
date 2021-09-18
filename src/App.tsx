@@ -1,6 +1,6 @@
 import React from 'react'
 import GlobalStyles from './styles/global'
-import Jokenpo from './page'
+import Jokenpo from './page/Home'
 
 const App: React.FC = () => {
   return (

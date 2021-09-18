@@ -1,9 +1,9 @@
 import React from 'react'
 import * as Style from './styles'
-import Score from '../components/Score'
-import Button from '../components/Button'
-import ButtonControl from '../components/ButtonControl'
-import useJokenpo from '../hooks/useJokenpo'
+import Score from '../../components/Score'
+import Button from '../../components/Button'
+import ButtonControl from '../../components/ButtonControl'
+import useJokenpo from '../../hooks/useJokenpo'
 
 const Jokenpo = () => {
   const { playAgain, play, score, status, active, player, computer } = useJokenpo()
